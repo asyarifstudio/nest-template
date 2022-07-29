@@ -8,7 +8,7 @@
   "scripts": {
     "start": "npm-run-all --parallel nest:start:dev fire:serve",
     "debug": "npm-run-all --parallel nest:start:debug fire:serve",
-    "prebuild": "rimraf dist && cp ./env.prod.ts ./env.ts",
+    "prebuild": "rimraf dist && cp ./src/env.prod.ts ./src/env.ts",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "nest:start": "nest start",
@@ -21,7 +21,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "fire:serve": "npm run build && firebase emulator:start --only functions,firestore,auth"
+    "fire:serve": "firebase emulators:start --only functions"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",

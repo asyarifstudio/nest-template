@@ -1,16 +1,17 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as admin from 'firebase-admin';
-import { environment } from 'env.prod';
+import { environment } from 'src/env.prod';
 import { ExpressAdapter, NestExpressApplication } from '@nestjs/platform-express';
 import * as express from 'express';
 import * as functions from 'firebase-functions';
+import { ServiceAccount } from 'firebase-admin';
 
 const server:express.Express = express();
 
 async function bootstrap() {
   admin.initializeApp({
-    credential:admin.credential.cert(environment.firebase.serviceAccount),
+    credential:admin.credential.cert(environment.firebase.serviceAccount as ServiceAccount),
     databaseURL:environment.firebase.databaseUrl
   })
   const adapter = new ExpressAdapter(server);
@@ -19,12 +20,7 @@ async function bootstrap() {
   )
 
   app.enableCors();
-  if(!environment.production){
-    return app.listen(3000);
-  }
-  else{
-    return app.init();
-  }
+  return app.init();
 }
 
 
