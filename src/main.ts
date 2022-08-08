@@ -28,4 +28,4 @@ async function bootstrap() {
 bootstrap()
   .then(v => console.log('Nest Ready'))
   .catch(err => console.error('Nest broken', err));
-export const api: functions.HttpsFunction = functions.https.onRequest(server);
+export const api: functions.HttpsFunction = functions.region('asia-southeast2').https.onRequest(server);
