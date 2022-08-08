@@ -19,8 +19,12 @@ async function bootstrap() {
     AppModule,adapter,{}
   )
 
-  app.enableCors();
-  return app.init();
+  if(!environment.production){
+    return app.listen(3000);
+  }
+  else{
+    return app.init();
+  }
 }
 
 
