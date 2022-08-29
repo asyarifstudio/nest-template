@@ -16,5 +16,6 @@ jobs:
         with:
           args: deploy --only functions
         env:
+          #call firebase login:ci to generate token for Gihub Secret in your PC
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           PROJECT_ID: projectId
