@@ -1,11 +1,11 @@
 
 import { namespace } from "firebase-functions/v1/firestore";
-import { CurrentUser } from "src/services/auth/user";
+import { CurrentUser } from "src/services/auth/current-user";
 
 declare global{
     namespace Express{
         interface Request {
-            user:CurrentUser
+            currentUser:CurrentUser
         }
     }
 }

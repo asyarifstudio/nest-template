@@ -44,7 +44,7 @@ export class DatabaseService<M extends Model>{
     async add(m: M): Promise<M> {
         //mandatory to call sanitize before saving the data
         m = this.sanitize(m);
-        
+
         const record = await this.collection.add(m);
         return this.getById(record.id);
     }
@@ -66,6 +66,19 @@ export class DatabaseService<M extends Model>{
                 ...doc.data()
             } as M;
         })
+    }
+
+    protected async findOne(query:FirebaseFirestore.Query):Promise<M>{
+        const snapshot = await query.get();
+        if(snapshot.docs.length == 0 || snapshot.docs.length > 1){
+            return undefined;
+        }
+        else{
+            return {
+                id:snapshot.docs[0].id,
+                ...snapshot.docs[0].data()
+            } as M;
+        }
     }
 
     protected sanitize(m:M):M{
