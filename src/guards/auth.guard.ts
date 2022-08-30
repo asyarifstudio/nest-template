@@ -4,7 +4,7 @@ import { Request } from 'express'
 import { AuthService } from 'src/services/auth/auth.service';
 
 @Injectable()
-export class RoleGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
 
   constructor(private authService:AuthService){}
   canActivate(

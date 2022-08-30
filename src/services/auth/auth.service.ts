@@ -22,6 +22,7 @@ export class AuthService {
             const record = await this.userService.getByEmail(email);
             return {
                 uid,
+                email,
                 info:record
             }
         }
