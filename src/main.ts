@@ -18,8 +18,10 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(
     AppModule,adapter,{}
   )
-
+  
+  app.enableCors();
   if(!environment.production){
+    
     return app.listen(3000);
   }
   else{
