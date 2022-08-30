@@ -33,6 +33,9 @@ export class DatabaseService<M extends Model>{
 
     async getById(id: string): Promise<M> {
         const snapshot = await this.collection.doc(id).get();
+        if(!snapshot.exists){
+            return undefined;
+        }
         return {
             'id':snapshot.id,
             ...snapshot.data()
